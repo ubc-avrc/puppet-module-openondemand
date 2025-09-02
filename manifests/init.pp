@@ -447,7 +447,7 @@ class openondemand (
     $repo_nightly_baseurl = "${repo_baseurl_prefix}/nightly/web/apt"
   }
 
-  if $custom_port { 
+  if $custom_port != undef { 
 	$port = '${custom_port}'
 	$listen_ports = ['${custom_port}']
 	$protocol = 'http'
