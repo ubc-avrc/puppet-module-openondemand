@@ -50,6 +50,8 @@
 #   ood_porta.yml server_aliases
 # @param ssl
 #   ood_portal.yml ssl
+# @param custom_port
+#   ood_portal.yml custom_port
 # @param disable_logs
 #   ood_portal.yml disable_logs
 # @param logroot
@@ -280,6 +282,7 @@ class openondemand (
   Optional[String] $servername = undef,
   Optional[Array] $server_aliases = undef,
   Optional[Array] $ssl = undef,
+  Optional[Integer[0,65535]] $custom_port = undef,
   Boolean $disable_logs = false,
   String  $logroot = 'logs',
   Boolean $use_rewrites = true,
@@ -444,7 +447,11 @@ class openondemand (
     $repo_nightly_baseurl = "${repo_baseurl_prefix}/nightly/web/apt"
   }
 
-  if $ssl {
+  if $custom_port { 
+	$port = $custom_port
+	$listen_ports = ['${custom_port}']
+	$protocol = 'http'
+  } elsif $ssl {
     $port = '443'
     $listen_ports = ['443', '80']
     $protocol = 'https'
