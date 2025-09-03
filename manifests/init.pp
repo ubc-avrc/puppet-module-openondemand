@@ -448,8 +448,8 @@ class openondemand (
   }
 
   if $custom_port != undef { 
-	$port = '${custom_port}'
-	$listen_ports = ['${custom_port}']
+	$port = "${custom_port}"
+	$listen_ports = ["${custom_port}"]
 	$protocol = 'http'
   } elsif $ssl {
     $port = '443'
